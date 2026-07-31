@@ -1,0 +1,469 @@
+# Week 1: Authentication & User Management
+
+## Overview
+
+Welcome to **BizCore ERP**, a modern Enterprise Resource Planning (ERP) system designed for Small and Medium Enterprises (SMEs). Throughout this internship, you will build this application module by module, learning industry-standard software development practices and modern full-stack technologies.
+
+This week's objective is to build a secure authentication and user management system that will serve as the foundation for the rest of the application.
+
+---
+
+# Learning Objectives
+
+By the end of this task, you should understand:
+
+- Project architecture
+- Git workflow
+- REST API principles
+- Authentication
+- Authorization
+- Password hashing
+- JWT Authentication
+- Refresh Tokens
+- Protected Routes
+- Form Validation
+- Error Handling
+- Clean Code Principles
+- Environment Variables
+- Database Design with Prisma
+- API Documentation
+
+---
+
+# Tech Stack
+
+## Frontend
+
+- Next.js (App Router)
+- TypeScript
+- Tailwind CSS
+- Shadcn UI
+- React Hook Form
+- Zod
+- TanStack Query
+- Axios
+
+---
+
+## Backend
+
+- Node.js
+- Express.js
+- TypeScript
+- Prisma ORM
+- PostgreSQL
+- JWT
+- bcrypt
+- Nodemailer
+- Express Validator
+
+---
+
+## Development Tools
+
+- Git
+- GitHub
+- Postman / Bruno
+- VS Code
+- Docker (optional)
+- Prisma Studio
+
+---
+
+# Project Structure
+
+```
+bizcore/
+
+│
+├── frontend/
+│
+└── backend/
+```
+
+---
+
+# Task Objectives
+
+Build a complete authentication system for BizCore ERP.
+
+The application should allow users to:
+
+- Register
+- Login
+- Logout
+- Verify Email
+- Reset Password
+- Change Password
+- Update Profile
+- Refresh Access Token
+
+---
+
+# Functional Requirements
+
+## 1. User Registration
+
+Create a registration page.
+
+Fields
+
+- First Name
+- Last Name
+- Email
+- Phone Number
+- Password
+- Confirm Password
+
+Requirements
+
+- Validate every field
+- Password minimum 8 characters
+- Password must contain:
+  - Uppercase
+  - Lowercase
+  - Number
+  - Special Character
+- Email must be unique
+- Password must be hashed
+
+---
+
+## 2. Email Verification
+
+After registration
+
+- Generate verification token
+- Send verification email
+- User cannot login until email is verified
+
+---
+
+## 3. Login
+
+User logs in using
+
+- Email
+- Password
+
+If successful
+
+Return
+
+- Access Token
+- Refresh Token
+- User Information
+
+---
+
+## 4. Refresh Token
+
+Implement refresh token endpoint.
+
+When the access token expires
+
+Generate a new one without forcing the user to login again.
+
+---
+
+## 5. Forgot Password
+
+User enters email.
+
+Generate reset token.
+
+Send reset email.
+
+---
+
+## 6. Reset Password
+
+Allow user to create a new password.
+
+Requirements
+
+- Token validation
+- Password validation
+
+---
+
+## 7. User Profile
+
+Authenticated users can
+
+- View profile
+- Edit profile
+- Upload profile picture (optional)
+
+---
+
+## 8. Change Password
+
+Require
+
+- Old Password
+- New Password
+- Confirm Password
+
+---
+
+## 9. Logout
+
+Invalidate refresh token.
+
+---
+
+# Authorization
+
+Create middleware for
+
+- Authentication
+- Authorization
+
+Roles
+
+```
+SUPER_ADMIN
+
+ADMIN
+
+MANAGER
+
+EMPLOYEE
+```
+
+Only authenticated users should access protected routes.
+
+---
+
+# Database Design
+
+Create the following model.
+
+```
+User
+
+id
+firstName
+lastName
+email
+phone
+password
+role
+isVerified
+verificationToken
+resetPasswordToken
+resetPasswordExpires
+refreshToken
+profileImage
+createdAt
+updatedAt
+```
+
+Use Prisma ORM.
+
+---
+
+# API Endpoints
+
+## Authentication
+
+```
+POST /api/auth/register
+
+POST /api/auth/login
+
+POST /api/auth/logout
+
+POST /api/auth/refresh
+
+POST /api/auth/forgot-password
+
+POST /api/auth/reset-password
+
+GET /api/auth/verify-email
+```
+
+---
+
+## User
+
+```
+GET /api/users/profile
+
+PATCH /api/users/profile
+
+PATCH /api/users/change-password
+```
+
+---
+
+# Validation
+
+Validate every request.
+
+Examples
+
+- Required fields
+- Email format
+- Password strength
+- Duplicate email
+- Invalid tokens
+
+Return meaningful error messages.
+
+---
+
+# Security Requirements
+
+- Hash passwords using bcrypt
+- Store secrets in .env
+- Never expose passwords
+- Protect private routes
+- Use HTTP-only cookies for refresh tokens (preferred)
+- Implement rate limiting on authentication endpoints
+- Enable CORS appropriately
+- Use Helmet middleware
+- Sanitize incoming data
+
+---
+
+# Frontend Requirements
+
+Create the following pages
+
+```
+/login
+
+/register
+
+/forgot-password
+
+/reset-password
+
+/profile
+```
+
+Requirements
+
+- Responsive Design
+- Loading Indicators
+- Error Messages
+- Success Toasts
+- Form Validation
+- Password Visibility Toggle
+
+---
+
+# UI Requirements
+
+Use a modern dashboard design.
+
+Include
+
+- Logo
+- Clean Forms
+- Dark Mode Support
+- Responsive Layout
+- Accessible Components
+
+---
+
+# Git Workflow
+
+Every feature should have its own branch.
+
+Example
+
+```
+feature/user-registration
+
+feature/login
+
+feature/password-reset
+```
+
+Merge changes through Pull Requests only.
+
+---
+
+# Documentation
+
+Document every endpoint using Swagger.
+
+Example
+
+```
+/docs
+```
+
+---
+
+# Testing
+
+Test every endpoint.
+
+Examples
+
+- Successful registration
+- Duplicate email
+- Wrong password
+- Invalid token
+- Expired token
+- Unauthorized request
+
+---
+
+# Bonus Features
+
+- Google Login
+- GitHub Login
+- Two-Factor Authentication
+- Remember Me
+- Session Management
+- Login History
+
+---
+
+# Deliverables
+
+At the end of this task, submit:
+
+- GitHub Repository
+- README
+- API Documentation
+- Database Schema
+- Postman Collection
+- Screenshots
+- Working Demo (optional)
+
+---
+
+# Evaluation Criteria
+
+| Category | Weight |
+|-----------|---------|
+| Clean Code | 15% |
+| UI Quality | 10% |
+| API Design | 20% |
+| Authentication | 20% |
+| Validation | 10% |
+| Security | 15% |
+| Git Usage | 5% |
+| Documentation | 5% |
+
+---
+
+# Expected Outcome
+
+By completing this task, you should be able to:
+
+- Build secure authentication systems
+- Design scalable REST APIs
+- Implement JWT Authentication
+- Work with Prisma ORM
+- Integrate frontend and backend
+- Apply software security best practices
+- Follow professional Git workflows
+
+This authentication module will serve as the foundation for all future modules of the BizCore ERP project.
