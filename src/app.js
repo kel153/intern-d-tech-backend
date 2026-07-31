@@ -12,6 +12,7 @@ const allowedOrigins = (process.env.CLIENT_URL || 'http://localhost:3000')
 app.use(helmet());
 app.use(cors({ origin: allowedOrigins }));
 app.use(express.json());
+app.get('/', (_req, res) => res.json({ success: true, message: 'BizCore API is running', endpoints: ['/health', '/api/auth', '/api/users'] }));
 app.get('/health', (_req, res) => res.json({ success: true, message: 'API is running' }));
 app.use('/api', routes);
 

@@ -10,11 +10,11 @@ CREATE TABLE "User" (
     "isVerified" BOOLEAN NOT NULL DEFAULT false,
     "verificationToken" TEXT,
     "resetPasswordToken" TEXT,
-    "resetPasswordExpires" DATETIME,
+    "resetPasswordExpires" TIMESTAMP(3),
     "refreshToken" TEXT,
     "profileImage" TEXT,
-    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" DATETIME NOT NULL
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL
 );
 
 -- CreateIndex
